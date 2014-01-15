@@ -1,0 +1,19 @@
+{
+  "name": "snowanalytics",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "instagram-node-lib": "~0.1.1",
+    "nconf": "~0.6.9",
+    "express": "~3.4.8",
+    "lodash": "~2.4.1",
+    "moment": "~2.5.0",
+    "async": "~0.2.9"
+  }
+}

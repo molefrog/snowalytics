@@ -45,9 +45,6 @@ x =  _.groupBy grouped[16], (d) ->
 
 
 
-
-console.log x[73][0].link
-
 # console.log r
 console.log data.length, statuses.length
 

@@ -4,15 +4,12 @@ qs 			= require "querystring"
 moment  	= require "moment"
 async 		= require "async"
 fs          = require "fs"
+Table       = require "cli-table"
 
+# Load data 
 data = require "./data.json"
 
-
-phrases = [
-	"снег"
-	"снеж"
-	"snow"
-]
+phrases = [ "снег", "снеж", "snow" ]
 
 c = _(data)
 	.compact()
@@ -33,20 +30,25 @@ grouped = _.groupBy c, (d) ->
 	time = moment.unix( d.created_time )
 	return time.hours() + 1
 
-# r = _.map grouped, (d, k) -> 
-# 	representative = _.sample d, (a) -> a.likes.count
+result = _.map grouped, (v, k) ->
+	sortedSamples = _.sortBy v, (d) -> -d.likes.count
 
-# 	text =
-# 	[k,  d.length,  representative.caption.text,  representative.link] 
+	samples = _.map sortedSamples, (d) ->
+		"#{d.likes.count} likes - #{d.link}"
 
-x =  _.groupBy grouped[16], (d) ->
-	d.likes.count
+	hour    : k
+	count   : v.length
+	samples : _.first samples
 
 
+resultTable = new Table
+	head: [ "Hour", "Count", "Samples" ]
 
+result.forEach (item) ->
+	resultTable.push [ item.hour, item.count, item.samples ]
 
-# console.log r
-console.log data.length, statuses.length
+console.log resultTable.toString() 
+
 
 
 
